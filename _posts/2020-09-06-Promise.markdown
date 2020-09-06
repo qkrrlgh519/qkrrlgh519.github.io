@@ -1,0 +1,92 @@
+---
+layout: post
+title:  "JavaScript Promise"
+date:   2020-09-06 16:00:00 +0900
+categories: JavaScript
+---
+
+# Promise
+
+## 1. Promise란?
+
+- Promise는 정해진 장시간의 기능을 수행하고 나서, 정상적으로 기능이 수행되었다면, 성공의 메시지와 함께 처리된 결과값을 전달해주고, 만약 예상치 못한 문제가 발생했다면, 에러를 전달해준다.
+- Promise는 JavaScript에 내장된 내장객체이다. 비동기적인 것을 수행할 때 콜백 함수 대신 유용하게 쓸 수 있는 객체이다.
+
+## 2. State
+
+- pending → (fulfilled, regected)
+- pending : 우리가 지정한 오퍼레이션을 수행 중인 상태
+- fulfiled :  오펴레이션을 성공적으로 다 끝낸 상태
+- regected : 파일을 찾을 수 없거나 네트워크에 문제가 생긴 상태
+
+## 3. Producer, Consumer
+
+- producer : 우리가 원하는 기능을 수행해서 해당 데이터를 만들어내는 객체 (즉, promise 객체)
+- consumer : 우리가 원하는 데이터를 소비하는 객체
+
+## 4. Producer
+
+- Promise는 클래스이기 때문에 new 키워드로 Object를 생성할 수 있다.
+
+```jsx
+const promise = new Promise()
+```
+
+- promise의 생성자에는 executor라는 콜백함수를 전달해줘야 한다.
+
+```jsx
+const promise = new Promise((resolve, reject) => {
+	//doing heavy work(network, read files)
+	console.log('doing something...');
+}):
+```
+
+- 그리고 executor는 또 다른 2가지의 콜백함수를 받는다.
+    - resolve : 기능을 정상적으로 수행해서 마지막에 최종 데이터를 전달하는 콜백함수
+    - reject : 기능을 수행하다가 중간에 문제가 생기면 호출하게 될 콜백함수
+- 위의 코드를 실행해보면 promise를 만드는 순간 바로 우리가 넣어준 콜백함수인 executor가 실행되는 것을 알 수 있다.
+- 그래서 만약 executor 안에 네트워크를 연결하는 기능을 구현한다면 promise를 만드는 순간 네트워크를 연결하는 작업을 수행한다. 이런 점을 유의해서 promise를 사용해야 한다.
+- 함수로 만들어서 promise 객체를 리턴하는 방식으로 쓴다면 문제가 되진 않겠다.
+
+```jsx
+const promise = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		//resolve('kiho');
+		//reject(new Error('no network'));
+	}, 2000);
+});
+```
+
+- excutor 안에 만약 우리가 만든 기능이 성공적으로 수행되었다면 resolve()를 호출하면 된다. 만약 가져온 데이터가 있다면 resolve를 통해서 전달하면 된다.
+
+## 5. Consumers : then, catch, finally
+
+```jsx
+promise
+	.then((value) => {
+		console.log(value);
+	})
+	.catch(error => {
+		console.log(error);
+	})
+	.finally(() => {
+		console.log('finallay');
+	});
+```
+
+- then : 기능이 정상적으로 수행이 된다면 then (그러면) value라는 값을 받아와서 우리가 원하는 기능을 수행하는 콜백함수를 전달해주면 된다.
+    - value라는 파라미터는 promise가 정상적으로 수행이 되어서 마지막으로 resolve 콜백 함수에 전달된 값이 들어온다.
+- catch : 에러가 발생했을 때 어떻게 처리할 지 콜백함수를 등록해주면 에러 핸들링을 할 수 있다.
+- promise에서 then을 호출하게 되면 promise를 리턴하기 때문에 리턴된 promise에 catch를 등록할 수 있는 것이다.
+
+## 6. Summary
+
+- promise 객체를 만들 때 우리가 비동기적으로 수행하고 싶은 그런 코드들을 promise 생성자 안에 작성하고 나서, 성공적으로 수행했다면 resolve를 호출하게 되고, 실패했다면 reject를 통해서 실패한 것과 이유를 전달하게 된다.
+- 그리고 나중에 이 promise 객체를 이용해서 then과 catch를 이용해서 성공한 값, 실패한 값을 받아와서 우리가 원하는 방식으로 처리해주면 된다.
+- finally는 성공하든 실패하든 무조건 수행된다.
+- when new Promise is created, the executor runs automatically!!
+
+## 출처
+
+- "드림코딩 by 엘리"님 유튜브의 자바스크립트 12. 프로미스 개념부터 활용까지 JavaScript Promise , 프론트엔드 개발자 입문편
+- 링크 : [https://www.youtube.com/watch?v=JB_yU6Oe2eE](https://www.youtube.com/watch?v=JB_yU6Oe2eE)
