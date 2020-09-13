@@ -26,7 +26,7 @@ categories: Programmers(3)
 
 ## 소스 코드
 
-```jsx
+```java
 class Solution {
     public int solution(int n) {
         final int MOD = 1000000007;
