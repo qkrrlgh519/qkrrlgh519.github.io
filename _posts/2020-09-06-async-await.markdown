@@ -101,7 +101,7 @@ prickFruits().then(console.log);
 
 ```jsx
 // 2. async, await
-const pickFruits = () => {
+const pickFruits = async () => {
 	const apple = await getApple();
 	const banana = await getBanana();
 	return `${apple} + ${banana}`; // 6초 후 'apple + banana'
