@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "정렬 알고리즘 기초 지식"
-date: 2020-01-11 23:50:00 +0900
+date: 2021-01-11 23:50:00 +0900
 categories: Algorithm(Sort)
 ---
 
