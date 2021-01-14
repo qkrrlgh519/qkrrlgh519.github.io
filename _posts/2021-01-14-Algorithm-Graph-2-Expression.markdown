@@ -23,7 +23,7 @@ categories: Algorithm(Graph)
 
 ### 03. 구현
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/139297ab-ac7d-45da-a22a-917f30e40211/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/139297ab-ac7d-45da-a22a-917f30e40211/Untitled.png)
+![ExampleGraph](/public/img/Graph/2021-01-14-Graph-2-Exp.JPG)
 
 - 정점 : [1, 2, 3, 4, 5, 6]
 - 간선 : [[1, 2], [1, 5], [2, 3], [2, 4], [2, 5], [3, 4], [4, 5]]
@@ -78,7 +78,7 @@ console.log(matrix);
 
 ### 03. 구현
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2728ada4-7149-4d13-aab6-b7c73c6c6ae9/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2728ada4-7149-4d13-aab6-b7c73c6c6ae9/Untitled.png)
+![ExampleGraph](/public/img/Graph/2021-01-14-Graph-2-Exp.JPG)
 
 - 정점 : [1, 2, 3, 4, 5, 6]
 - 간선 : [[1, 2], [1, 5], [2, 3], [2, 4], [2, 5], [3, 4], [4, 5]]
@@ -130,5 +130,3 @@ console.log(list);
 
 - C언어로 쉽게 풀어쓴 자료구조 (천인국, 공용해, 하상호)
 - 프로그래밍 대회에서 배우는 알고리즘 문제 해결 전략 (구종만)
-
-- `test`, test
