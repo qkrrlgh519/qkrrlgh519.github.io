@@ -71,3 +71,9 @@ const SelectionSort = (array) => {
   - **최선, 평균, 최악** 모두 **O(n^2)**으로 동일
 - **공간 복잡도**
   - **주어진 배열 안에서** 교환(SWAP)을 통해, 정렬이 수행되므로 **O(n)** 이다.
+
+### 06. 참고
+
+- C언어로 쉽게 풀어쓴 자료구조 (천인국, 공용해, 하상호 지음)
+- [https://gmlwjd9405.github.io/2018/05/06/algorithm-selection-sort.html](https://gmlwjd9405.github.io/2018/05/06/algorithm-selection-sort.html)
+- [https://gyoogle.dev/blog/algorithm/Selection Sort.html](https://gyoogle.dev/blog/algorithm/Selection%20Sort.html)
