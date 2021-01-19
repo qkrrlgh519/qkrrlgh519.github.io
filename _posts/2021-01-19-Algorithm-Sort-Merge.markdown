@@ -19,7 +19,7 @@ categories: Algorithm(Sort)
 - 합병 정렬에서 **실제로 정렬이 이루어지는 시점**은 2개의 리스트를 **합병(merge)하는 단계**이다.
 - 추가적인 리스트를 필요로 한다.
 
-  ![합병 정렬 각 단계](/public/img/Sort/mergesort1.JPG)
+![합병 정렬 각 단계](/public/img/Sort/mergesort1.JPG)
 
 - **합병 정렬의 각 단계**
 
@@ -27,8 +27,7 @@ categories: Algorithm(Sort)
   2. **정복 (Conquer)** : 부분 배열을 정렬한다. 부분 배열의 크기가 **충분히 작지 않으면 재귀(순환) 호출**을 이용해 다시 분할 정복 기법을 적용한다.
   3. **결합 (Combine)** : 정렬된 부분 배열들을 하나의 배열에 합병한다.
 
-
-      ![합병 과정](/public/img/Sort/mergesort2.JPG)
+![합병 과정](/public/img/Sort/mergesort2.JPG)
 
 - **합병(merge) 방법**
   - 2개의 리스트의 요소들을 처음부터 **하나씩 비교**하여, 두 개의 리스트의 요소 중에서 **더 작은 요소를 새로운 리스트(sorted)로** 옮긴다.
@@ -99,7 +98,7 @@ console.log(array);
 ```
 
 ```java
-// 방법 2. 더 짧고, 더 직관적인 방식이다. 허나 동작 방식이 조금 다름
+// 방법 2. 더 짧고, 더 직관적인 방법 허나 동작 방식이 조금 다름
 
 const merge = (leftArray, rightArray) => {
 	let sortedArray = [];
