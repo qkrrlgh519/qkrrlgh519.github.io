@@ -146,3 +146,8 @@ console.log(array);
   - **T(n) = O(n^2)**
 - **평균**의 경우
   - **T(n) = O(nlogn)**
+
+### 07. 참고
+
+- C언어로 쉽게 풀어쓴 자료구조 (천인국, 공용해, 하상호 지음)
+- [https://gmlwjd9405.github.io/2018/05/10/algorithm-quick-sort.html](https://gmlwjd9405.github.io/2018/05/10/algorithm-quick-sort.html)
