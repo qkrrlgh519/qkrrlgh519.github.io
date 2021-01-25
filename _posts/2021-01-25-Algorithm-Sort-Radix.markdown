@@ -61,14 +61,12 @@ const RadixSort = (array) => {
 
 	for (let i = 0; i < DIGITS; i++) {
 		for (let j = 0; j < arrLen; j++) {
-			// 1.
-			queues[parseInt((array[j] / factor) % 10)].push(array[j]);
+			queues[parseInt((array[j] / factor) % 10)].push(array[j]); // 1.
 		}
 
 		for (let j = 0, arrIdx = 0; j < BUCKETS; j++) {
 			while (queues[j].length) {
-				// 2.
-				array[arrIdx++] = queues[j].shift();
+				array[arrIdx++] = queues[j].shift(); // 2.
 			}
 		}
 
