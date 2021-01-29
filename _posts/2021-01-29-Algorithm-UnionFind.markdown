@@ -40,12 +40,12 @@ categories: Algorithm(Graph)
 
 ## 4. 트리로 표현하기
 
+![union-find를 트리로 표현](/public/img/Graph/unionfind2.JPG)
+
 ### 01. 개념
 
 - 위의 배열로 표현한 것의 문제를 개선할 수 있는 방법이다.
 - **한 집합에 속하는 원소들을 하나의 트리로 묶어준다.** 따라서 상호 배타적 집합 자료 구조는 트리들의 집합으로 표현된다. **(배열을 이용해 트리 표현)**
-
-![union-find를 트리로 표현](/public/img/Graph/unionfind2.JPG)
 
 - **찾기(find) 연산**
   - **트리와 루트는 항상 1:1 대응**이다. 그래서 루트가 같다면 두 노드가 같은 트리에 속해있음은 자명하다.
@@ -144,7 +144,7 @@ class DisjointSet {
 
 ### 03. 해결 2 : 경로 압축 (path compression) 최적화
 
-![경로 압축 최적화](/public/img/Graph/unionfind5.JPG)
+    ![경로 압축 최적화](/public/img/Graph/unionfind5.JPG)
 
 - **찾기 연산이 중복된 계산을 여러번** 하고 있다는 데 착안한다.
 - find(u)를 통해 u가 속하는 루트를 찾아냈다고 하자. 이때 **parent[u]를 찾아낸 루트로 아예 바꿔** 버리면 다음번에 find(u)가 호출되었을 때는 경로를 따라 올라갈 것 없이 바로 루트를 찾을 수 있을 것이다.
