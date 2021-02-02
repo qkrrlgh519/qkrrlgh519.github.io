@@ -1,0 +1,36 @@
+---
+layout: post
+title: "BOJ: 수 정렬하기2 (# 2751) by JavaScript"
+date: 2021-02-02 19:00:00 +0900
+categories: BOJ(Sort)
+---
+
+# 수 정렬하기 2
+
+## 문제
+
+- ![백준 2751번 - 수 정렬하기2](https://www.acmicpc.net/problem/2751)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- Array의 내장함수인 sort를 이용해서 오름차순으로 정렬합니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const sort = (input) => {
+	const n = parseInt(input[0]);
+	const arr = input.slice(1, n + 1).map((v) => parseInt(v));
+	arr.sort((a, b) => a - b);
+
+	console.log(arr.join("\n"));
+};
+
+sort(input);
+```
