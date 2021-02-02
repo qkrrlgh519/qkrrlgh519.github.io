@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "BOJ: 수 정렬하기2 (# 2751) by JavaScript"
+title: "BOJ[2751] - 수 정렬하기2 by JavaScript"
 date: 2021-02-02 19:00:00 +0900
 categories: BOJ(Sort)
 ---
@@ -9,7 +9,7 @@ categories: BOJ(Sort)
 
 ## 문제
 
-- ![백준 2751번 - 수 정렬하기2](https://www.acmicpc.net/problem/2751)
+- [백준 2751번 - 수 정렬하기2](https://www.acmicpc.net/problem/2751)
 
 ## 언어
 
