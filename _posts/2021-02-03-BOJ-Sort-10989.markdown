@@ -1,0 +1,86 @@
+---
+layout: post
+title: "BOJ[10989] - 수 정렬하기3 by Java"
+date: 2021-02-03 18:00:00 +0900
+categories: BOJ(Sort)
+---
+
+# 수 정렬하기 3
+
+## 문제
+
+- [백준 10989번 - 수 정렬하기3](https://www.acmicpc.net/problem/10989)
+
+## 언어
+
+- Java
+
+## 문제 풀이 step 1
+
+- `Arrays.sort()`를 이용합니다.
+- 또는 CountingSort(계수 정렬)을 이용합니다.
+
+## 소스 코드
+
+- `Arrays.sort()` 이용
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		int[] arr = new int[n];
+		for(int i=0; i<n; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+		}
+
+		Arrays.sort(arr);
+
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<n; i++) {
+			sb.append(arr[i]+"\n");
+
+		}
+
+		System.out.println(sb);
+	}
+}
+```
+
+- CountingSort(계수 정렬) 이용
+
+```java
+import java.io.*;
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		int[] countingArr = new int[10001];
+		for(int i=0; i<n; i++) {
+			int j = Integer.parseInt(br.readLine());
+			countingArr[j]++;
+		}
+
+		StringBuilder sb = new StringBuilder();
+		for(int i=0; i<10001; i++) {
+			if(countingArr[i] == 0) continue;
+			while(countingArr[i]-- > 0) {
+				sb.append(i+"\n");
+			}
+		}
+
+		System.out.println(sb);
+	}
+}
+```
+
+## 후기
+
+- JavaScript로 CountingSort와 RadixSort을 이용해서 풀어봤지만, 메모리 초과가 나서 Java로 풀게되었습니다.
+- 특정 조건에서는 `Arrays.sort()`보다는 CountingSort가 더 빠른 것을 확인할 수 있었습니다.
+  ![Arrays.sort와 CountingSort 비교](/public/img/BOJ-Sort/BOJ-10989-1.JPG)
