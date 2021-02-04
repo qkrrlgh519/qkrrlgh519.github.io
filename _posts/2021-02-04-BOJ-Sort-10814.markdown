@@ -1,0 +1,57 @@
+---
+layout: post
+title: "BOJ[10814] - 나이순 정렬 by JavaScript"
+date: 2021-02-04 18:40:00 +0900
+categories: BOJ(Sort)
+---
+
+# 나이순 정렬
+
+## 문제
+
+- [백준 10814번 - 나이순 정렬](https://www.acmicpc.net/problem/10814)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- `Arrays.sort()`를 이용합니다.
+- 또는 CountingSort를 이용합니다.
+
+## 소스 코드
+
+- CountingSort 이용
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const sort = (input) => {
+	const n = parseInt(input[0]);
+	const arr = input
+		.slice(1, n + 1)
+		.map((v) => v.split(" "))
+		.map((v) => [parseInt(v[0]), v[1]]);
+
+	const countingArr = Array.from({length: 201}, () => []);
+	for (let i = 0; i < arr.length; i++) {
+		countingArr[arr[i][0]].push(arr[i][1]);
+	}
+
+	for (let i = 0, arrIdx = 0; i < 201; i++) {
+		if (countingArr[i].length === 0) continue;
+		for (let j = 0; j < countingArr[i].length; j++) {
+			arr[arrIdx++] = `${i} ${countingArr[i][j]}`;
+		}
+	}
+
+	console.log(arr.join("\n"));
+};
+
+sort(input);
+```
+
+## 후기
+
+- 역시 특정 조건에서는 CountingSort를 쓰는 것이 더 빠른 것을 확인할 수 있었습니다.
