@@ -1,0 +1,49 @@
+---
+layout: post
+title: "BOJ[1181] - 단어 정렬 by JavaScript"
+date: 2021-02-04 18:30:00 +0900
+categories: BOJ(Sort)
+---
+
+# 단어 정렬
+
+## 문제
+
+- [백준 1181번 - 단어 정렬](https://www.acmicpc.net/problem/1181)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- `Arrays.sort()`를 이용합니다.
+- 중복 검사는 `Set`을 이용합니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const sort = (input) => {
+	const n = parseInt(input[0]);
+	const arr = input.slice(1, n + 1);
+
+	arr.sort((a, b) => {
+		if (a.length === b.length) {
+			return a < b ? -1 : 1;
+		} else {
+			return a.length - b.length;
+		}
+	});
+
+	console.log(Array.from(new Set(arr)).join("\n"));
+};
+
+sort(input);
+```
+
+## 후기
+
+- 삼항 연산자를 이용해서 Sort 함수의 코드 복잡도와 라인수를 줄일 수 있었습니다. 속도도 미세하게나마 더 빠른 것을 확인했습니다.
+- 중복 검사를 할 때 Set을 이용했는데 생각보다 시간이 느리지 않아서 좋았습니다.
