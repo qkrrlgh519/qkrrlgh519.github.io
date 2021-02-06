@@ -1,0 +1,46 @@
+---
+layout: post
+title: "BOJ[1026] - 보물 by JavaScript"
+date: 2021-02-06 18:40:00 +0900
+categories: BOJ(Sort)
+---
+
+# 보물
+
+## 문제
+
+- [백준 1026번 - 보물](https://www.acmicpc.net/problem/1026)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- A 배열은 오름차순으로 B 배열은 내림차순으로 정렬합니다.
+- B를 재배치하지 말라는 말 때문에 헷갈릴 수 있으나, 문제에서 요구하는 것은 정렬된 배열이 아닌 정렬 후 각 배열의 곱셈합을 구하는 것입니다.
+- 그렇기 때문에 신경쓰지말고 재배치 후, 두 배열의 곱셈합을 구하면 됩니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const sort = (input) => {
+	const N = Number(input[0]);
+	const A = input[1].split(" ").map(Number);
+	const B = input[2].split(" ").map(Number);
+
+	A.sort((a, b) => a - b);
+	B.sort((a, b) => b - a);
+
+	let sum = 0;
+	for (let i = 0; i < N; i++) {
+		sum += A[i] * B[i];
+	}
+
+	console.log(sum);
+};
+
+sort(input);
+```
