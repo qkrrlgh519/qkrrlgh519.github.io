@@ -1,0 +1,92 @@
+---
+layout: post
+title: "BOJ[2839] - 설탕 배달 by JavaScript"
+date: 2021-02-08 09:30:00 +0900
+categories: BOJ(DP)
+---
+
+# 설탕 배달
+
+## 문제
+
+- [백준 2839번 - 설탕 배달](https://www.acmicpc.net/problem/2839)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- **착안**
+  - 마지막 단계에 봉지를 추가할 때, 3kg짜리 봉지를 추가하거나 5kg짜리 봉지를 추가합니다.
+- **점화식**
+  - dp[N] = Nkg을 담을 때 사용하는 최소 봉지의 개수
+  1. 정확히 Nkg를 만들 수 없는 경우
+  - if(dp[N-3] === -1 && dp[N-5] === -1) dp[N] = -1
+  2. 정확히 Nkg을 만들 수 있지만 3kg 혹은 5kg 중 한 종류만 사용가능한 경우
+  - if(dp[N-3] === -1 || dp[N-5] === -1) dp[N] = Math.max(dp[N-3], dp[N-5]) + 1
+  3. 정확히 Nkg을 만들 수 있고, 두 종류 다 사용가능한 경우
+  - if(dp[N-3] !== -1 && dp[N-5] !== -1) dp[N] = Math.min(dp[N-3], dp[N-5]) + 1
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const getAvg = (arr, N) => {
+	let sum = 0;
+	for (let i = 0; i < N; i++) {
+		sum += arr[i];
+	}
+
+	return Math.round(sum / N);
+};
+
+const getCenter = (arr, N) => {
+	if (N === 1) return arr[0];
+	else return arr[Math.floor(N / 2)];
+};
+
+const getMode = (arr, N) => {
+	const map = new Map();
+
+	let max = 0;
+	for (let i = 0; i < N; i++) {
+		map.set(arr[i], map.get(arr[i]) ? map.get(arr[i]) + 1 : 1);
+		if (max < map.get(arr[i])) max = map.get(arr[i]);
+	}
+
+	const modes = new Array();
+	for (let [key, value] of map) {
+		if (value === max) modes.push(key);
+	}
+
+	if (modes.length === 1) return modes[0];
+	else return modes[1];
+};
+
+const getRange = (arr, N) => arr[N - 1] - arr[0];
+
+const solution = (input) => {
+	const N = Number(input[0]);
+	const arr = input
+		.slice(1, N + 1)
+		.map(Number)
+		.sort((a, b) => a - b);
+
+	let max = 0;
+	for (let i = 0; i < N; i++) {
+		let weight = arr[i] * (i + 1);
+		if (weight > max) max = weight;
+	}
+
+	const result = `${getAvg(arr, N)}\n
+    ${getCenter(arr, N)}\n
+    ${getMode(arr, N)}\n
+    ${getRange(arr, N)}`;
+
+	console.log(result);
+};
+
+solution(input);
+```
