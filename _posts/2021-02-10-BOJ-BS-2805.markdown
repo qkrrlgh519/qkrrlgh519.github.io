@@ -1,0 +1,70 @@
+---
+layout: post
+title: "BOJ[2805] - 나무 자르기 by JavaScript"
+date: 2021-02-10 11:00:00 +0900
+categories: BOJ(BinarySearch)
+---
+
+# 나무 자르기
+
+## 문제
+
+- [백준 2805번 - 나무 자르기](https://www.acmicpc.net/problem/2805)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- 오름차순으로 정렬합니다.
+- 0과 배열의 최댓값을 기준으로 이진 탐색을 진행하며 조건을 만족한는 값을 찾습니다.
+- 조건은 그 값으로 나무들을 절단 한 후에 절단한 나무들의 높이 합이 M보다 같거나 커야 합니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const getSum = (arr, N, height) => {
+	let sum = 0;
+	for (let i = N - 1; i >= 0; i--) {
+		if (arr[i] <= height) break;
+		sum += arr[i] - height;
+	}
+	return sum;
+};
+
+const solution = (input) => {
+	const [N, M] = input[0].split(" ").map(Number);
+	const arr = input[1]
+		.split(" ")
+		.map(Number)
+		.sort((a, b) => a - b);
+
+	let res = 0;
+	let low = 0;
+	let high = arr[N - 1];
+	while (low <= high) {
+		let mid = parseInt((low + high) / 2);
+
+		if (getSum(arr, N, mid) >= M) {
+			res = mid;
+			low = mid + 1;
+		} else high = mid - 1;
+	}
+
+	console.log(res);
+};
+
+solution(input);
+```
+
+## 후기
+
+- 아직 이진 탐색에 미숙해서 유연한 활용을 못했습니다.
+- key 값이 주어지고, 그 값의 위치 혹은 존재 여부를 찾는 곳에만 사용된다고 생각했습니다. 하지만 그것을 넘어서 특정 조건에 적합한 값을 찾는 곳에도 이진 탐색을 활용할 수 있다는 것을 깨닫게 되었습니다.
+- index를 조작하며 이진 탐색을 해야한다고 생각했지만, 내가 정한 특정 범위 안에서 값들을 이용하고 조작하며 탐색을 할 수도 있다는 것을 깨달았습니다.
+- 그리고 그 특정 범위를 정할 때 정확하게 정해야한다는 것을 깨달았습니다.
+- 선형 탐색과 이진 탐색에 속도가 약 5배 정도 차이난다는 것을 확인할 수 있었습니다.
+  ![선형 탐색과 이진 탐색 비교](/public/img/BOJ-BinarySearch/BOJ-2805-1.JPG)
