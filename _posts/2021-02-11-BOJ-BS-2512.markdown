@@ -1,0 +1,71 @@
+---
+layout: post
+title: "BOJ[2512] - 예산 by JavaScript"
+date: 2021-02-11 15:30:00 +0900
+categories: BOJ(BinarySearch)
+---
+
+# 예산
+
+## 문제
+
+- [백준 2512번 - 예산](https://www.acmicpc.net/problem/2512)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- 오름차순으로 정렬합니다.
+- 모든 요청한 값들을 합한 값이 총 예산의 이하이면 요청한 값중 최댓값을 출력합니다.
+- 위의 경우를 제외한 다른 경우는,
+- 0과 배열의 최댓값을 기준으로 이진 탐색을 진행하며 조건을 만족한는 값을 찾습니다.
+- 조건은 요청한 값과 배정한 값을 적절히 합한 값이 총 예산의 이하여야 합니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const getSum = (arr, N, key) => {
+	let sum = 0;
+	for (let i = 0; i < N; i++) {
+		if (arr[i] <= key) sum += arr[i];
+		else sum += key;
+	}
+	return sum;
+};
+
+const solution = (input) => {
+	const N = parseInt(input[0]);
+	const arr = input[1]
+		.split(" ")
+		.map(Number)
+		.sort((a, b) => a - b);
+	const M = parseInt(input[2]);
+
+	const sum = arr.reduce((ac, cu) => ac + cu);
+	if (sum <= M) return arr[N - 1];
+
+	let res = 0;
+	let low = 0;
+	let high = arr[N - 1];
+	while (low <= high) {
+		const mid = parseInt((low + high) / 2);
+
+		if (getSum(arr, N, mid) <= M) {
+			res = mid;
+			low = mid + 1;
+		} else high = mid - 1;
+	}
+
+	return res;
+};
+
+console.log(solution(input));
+```
+
+## 후기
+
+- 어떤 문제를 보고 이 문제의 해결 방법이 이진 탐색인지 생각해낼 수 있을지 의문입니다.
