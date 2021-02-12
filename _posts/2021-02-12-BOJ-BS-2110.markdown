@@ -1,0 +1,96 @@
+---
+layout: post
+title: "BOJ[2110] - 공유기 설치 by JavaScript"
+date: 2021-02-12 20:30:00 +0900
+categories: BOJ(BinarySearch)
+---
+
+# 공유기 설치
+
+## 문제
+
+- [백준 2110번 - 공유기 설치](https://www.acmicpc.net/problem/2110)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- 오름차순으로 정렬합니다.
+- 특정 범위 내에서 이진 탐색을 진행합니다.
+- 범위는 1부터 K까지 입니다. (K는 첫 번째 집과 마지막 집의 차이로 합니다.)
+- 이진 탐색을 진행할 때 범위를 두 부분으로 나누는 조건을 결정합니다.
+- 조건은 집 사이의 거리가 mid 값 이상일 때만 설치를 하다가 마지막 집까지 갔을 때 설치한 공유기 개수가 주어진 공유기 개수보다 작은 경우, 같거나 큰 경우로 나눈다.
+- 문제에서는 가장 인접한 공유기의 최대 거리이므로, 반복시마다 실제 설치했던 거리들을 수집해서 최소값을 mid 값으로 바꾼다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const checkPossible = (arr, N, mid, C) => {
+	const dist = [];
+
+	//맨 왼쪽과 오른쪽 집에 공유기 설치
+	C -= 2;
+
+	let before = 0;
+	let final = 0;
+	for (let i = 1; i < N; i++) {
+		let now = arr[i] - arr[before];
+		if (now < mid) continue;
+
+		dist.push(now);
+		before = i;
+		C -= 1;
+
+		if (C === 0) {
+			final = arr[N - 1] - arr[i];
+			dist.push(final);
+			break;
+		}
+	}
+
+	// 다 설치 못한 경우
+	if (C !== 0) return -1;
+
+	if (final < mid) return -1;
+
+	return Math.min(...dist);
+};
+
+const solution = (input) => {
+	let [N, C] = input[0].split(" ").map(Number);
+	const arr = input
+		.slice(1, N + 1)
+		.map(Number)
+		.sort((a, b) => a - b);
+
+	let res = 1;
+	let low = 1;
+	let high = parseInt((arr[N - 1] - arr[0]) / (C - 1)) + 1;
+	while (low <= high) {
+		let mid = parseInt((low + high) / 2);
+
+		let check = checkPossible(arr, N, mid, C);
+		if (check === -1) {
+			high = mid - 1;
+		} else {
+			mid = check;
+			res = mid;
+			low = mid + 1;
+		}
+	}
+
+	return res;
+};
+
+console.log(solution(input));
+```
+
+## 후기
+
+- 이진 탐색으로 풀기위해서는 특정 범위를 정할 수 있어야 하고, 그 범위를 이등분 하는 그 조건을 정할 수 있어야 할 것 같습니다.
+- 처음에는 도저히 어떻게 풀어야 할 지 모르겠어서 종이에 별의 별 공상을 하면서 여러번의 이상한 방식으로 접근을 했었는데, 결국은 mid 값을 통해서 mid 값 이상일 때만 설치한다는 생각에 도달하고 나서야 풀 수 있었습니다.
+- 제 생각으로는 일단 첫 번째 집과 마지막 집에 우선적으로 설치를 해야 인접한 공유기의 거리가 최대가 나올 것이라고 판단했습니다. 그 결과 범위를 이등분 하는 조건 함수가 상당히 더럽고, 길어졌습니다.
