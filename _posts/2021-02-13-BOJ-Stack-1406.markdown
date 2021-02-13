@@ -1,0 +1,65 @@
+---
+layout: post
+title: "BOJ[1406] - 에디터 by JavaScript"
+date: 2021-02-13 22:00:00 +0900
+categories: BOJ(DataStructure)
+---
+
+# 에디터 (스택)
+
+## 문제
+
+- [백준 1406번 - 에디터](https://www.acmicpc.net/problem/1406)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- 스택을 2 개 이용합니다.
+- 왼쪽 스택과 오른쪽 스택으로 구성해서 두 스택의 top 이 커서의 위치입니다.
+- 명령어가 "L"이면 왼쪽 스택에서 pop 한 값을 오른쪽 스택에 push 합니다. ("D"는 반대로 합니다.)
+- 명령어가 "B"이면 왼쪽 스택에서 pop 합니다.
+- 명령어가 "P $"이면 온쪽 스택에 "$"를 push 합니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const solution = (input) => {
+	const lStack = input[0].split("");
+	const rStack = [];
+	const N = parseInt(input[1]);
+	const arr = input.slice(2, N + 2);
+
+	for (let i = 0; i < N; i++) {
+		const [command, char] = arr[i].split(" ");
+
+		switch (command) {
+			case "L":
+				if (lStack.length > 0) rStack.push(lStack.pop());
+				break;
+			case "D":
+				if (rStack.length > 0) lStack.push(rStack.pop());
+				break;
+			case "B":
+				if (lStack.length > 0) lStack.pop();
+				break;
+			case "P":
+				lStack.push(char);
+				break;
+		}
+	}
+
+	return lStack.join("") + rStack.reverse().join("");
+};
+
+console.log(solution(input));
+```
+
+## 후기
+
+- 비슷한 문제를 접할 때 스택을 이용할 생각을 할 수 있을지 모르겠습니다.
+- 어쨌든 정말 재미있는 문제였습니다.
