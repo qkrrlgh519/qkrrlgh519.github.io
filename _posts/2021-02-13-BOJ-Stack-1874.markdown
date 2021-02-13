@@ -1,0 +1,55 @@
+---
+layout: post
+title: "BOJ[1874] - 스택 수열 by JavaScript"
+date: 2021-02-13 21:30:00 +0900
+categories: BOJ(DataStructure)
+---
+
+# 스택 수열 (스택)
+
+## 문제
+
+- [백준 1874번 - 스택 수열](https://www.acmicpc.net/problem/1874)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- 스택을 이용합니다.
+- 스택의 맨 위의 값이 입력된 수열의 현재 위치 값보다 작다면 같아질 때까지 push를 진행합니다.
+- 스택의 맨 위의 값이 입력된 수열의 현재 위치 값과 같다면 pop을 진행합니다.
+- 만약 스택 맨 위의 값이 입력된 수열의 현재 위치 값과 다르다면 "NO"를 출력합니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const solution = (input) => {
+	const N = parseInt(input[0]);
+	const arr = input.slice(1, N + 1).map(Number);
+
+	const stack = [];
+	let step = 1;
+	let res = "";
+	for (let i = 0; i < N; i++) {
+		while (stack.length <= 0 || stack[stack.length - 1] < arr[i]) {
+			stack.push(step++);
+			res += "+\n";
+		}
+
+		if (stack[stack.length - 1] === arr[i]) {
+			stack.pop();
+			res += "-\n";
+		} else {
+			return "NO";
+		}
+	}
+
+	return res;
+};
+
+console.log(solution(input));
+```
