@@ -1,0 +1,101 @@
+---
+layout: post
+title: "BOJ[17298] - 오큰수 by JavaScript"
+date: 2021-02-16 16:30:00 +0900
+categories: BOJ(DataStructure)
+---
+
+# 오큰수 (스택)
+
+## 문제
+
+- [백준 17298번 - 오큰수](https://www.acmicpc.net/problem/17298)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- "현 위치의 값의 오큰수는 무엇인가" 라는 생각으로 접근한 풀이법입니다.
+- stack을 이용해서 풀고, 배열의 맨 뒤에서부터 오큰수를 정해주면서 한 단계씩 앞으로 갑니다.
+- 맨 뒤에서부터 오면서 각 단계마다 배열의 값을 스택에 담습니다. 스택에 담기 전에 스택에서 현재 단계의 값보다 큰 값을 찾습니다.
+- 스택에서 찾는 과정 중 현재 단계의 값보다 작은 값은 pop해서 날려도 상관 없습니다. (왜냐하면 현재 단계의 값을 스택에 넣을 것이고, 현재 단계의 값보다 작은 값은 왼쪽의 수들의 오큰수가 될 수 없기 때문입니다.)
+- 스택에는 오른쪽의 값들이 순차적으로 담겨있기 때문에 큰 값이 바로 현재 단계의 오큰수입니다.
+- 만약 스택을 다 비워도 현재 단계의 값보다 큰 값이 없다면 오큰수가 없는 것이므로 -1이 됩니다.
+- 매 단계마다 스택에 배열의 값을 담는 이유는 각 단계의 값이 오큰수가 될 수 있고, 또한 오큰수는 오른쪽 값들 중 가장 왼쪽 값이어야 하기 때문입니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const solution = (input) => {
+	const N = parseInt(input[0]);
+	const arr = input[1].split(" ").map(Number);
+
+	const res = [];
+	const stack = [];
+	for (let i = N - 1; i >= 0; i--) {
+		while (stack.length > 0 && stack[stack.length - 1] <= arr[i]) {
+			stack.pop();
+		}
+
+		if (stack.length === 0) {
+			res[i] = -1;
+		} else {
+			res[i] = stack[stack.length - 1];
+		}
+
+		stack.push(arr[i]);
+	}
+
+	return res.join(" ");
+};
+
+console.log(solution(input));
+```
+
+---
+
+## (다른 방법) 문제 풀이 step 1
+
+- "현 위치의 값은 어떤 값의 오큰수인가" 라는 생각으로 접근한 풀이법입니다.
+- stack을 이용해서 풀고, 이번에는 배열의 앞에서부터 진행하고, 스택에 값이 아닌 배열의 index를 넣는 방식으로 진행합니다.
+- 우선 결과 배열을 -1로 다 초기화해줍니다.
+- 맨 앞에서부터 가면서 각 단계마다 배열의 index를 스택에 넣어줍니다. 스택에 넣기 전에 스택에서 현 위치의 값보다 작은 값을 찾습니다. (찾을 때는 index이니까 바로 비교하면 안 됩니다.)
+- 스택에서 현 위치의 값보다 작은 값들의 오큰수가 바로 현 위치의 값입니다.
+- 만약 현 위치의 값보다 작은 값이 없다면 오큰수가 될 수 없으므로 넘어갑니다.
+- 이 방식은 527에서 5의 오큰수가 7이면 5와 7사이에는 5보다 큰 수가 없기 때문에 가능합니다. (각 단계를 지날 때마다 스택에는 내림차순으로 수가 쌓입니다.)
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const solution = (input) => {
+	const N = parseInt(input[0]);
+	const arr = input[1].split(" ").map(Number);
+
+	const res = Array(N).fill(-1);
+	const stack = [];
+
+	for (let i = 0; i < N; i++) {
+		while (stack.length && arr[stack[stack.length - 1]] < arr[i]) {
+			res[stack[stack.length - 1]] = arr[i];
+			stack.pop();
+		}
+
+		stack.push(i);
+	}
+
+	return res.join(" ");
+};
+
+console.log(solution(input));
+```
+
+## 후기
+
+- 첫 번째 방법이 제 머리에서 나온 방법인데, 아쉽지만 두 번째 방법이 더 빠릅니다.
+- 하지만 비슷한 문제를 접했을 때 두 번째 방법을 생각해내서 풀 수 있을 지는 의문입니다. (짧은 시간 속에서 저런 성질을 생각해낼 수 없을 것 같기 때문입니다.)
