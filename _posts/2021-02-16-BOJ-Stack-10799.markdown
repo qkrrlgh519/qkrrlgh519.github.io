@@ -1,0 +1,54 @@
+---
+layout: post
+title: "BOJ[10799] - 쇠막대기 by JavaScript"
+date: 2021-02-16 14:30:00 +0900
+categories: BOJ(DataStructure)
+---
+
+# 쇠막대기 (스택)
+
+## 문제
+
+- [백준 10799번 - 쇠막대기](https://www.acmicpc.net/problem/10799)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- stack을 이용해서 풉니다.
+- 괄호가 쇠막대기인지 레이저인지 구분해야 합니다.
+- 여는 괄호가 들어올 떄는 스택에 넣습니다.
+- 닫는 괄호가 들어올 때 바로 이전의 괄호가 여는 괄호이면 레이저 입니다. (레이저는 여는 괄호와 닫는 괄호의 인접한 쌍으로 표현된다고 주어졌습니다.)
+- 실제로 스택에 넣고 빼지 않고, 괄호의 개수를 세는 방식으로 추상화한 방법으로 구현합니다. (실제 스택에 넣는 것보다 빠르기 때문)
+- 하지만 실제 스택에 넣고 빼는 방법과 개수를 세는 방식을 비교해보니 생각보다 시간차가 크진 않습니다. 그래도 개수를 세는 방식이 더 빠르긴 합니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const solution = (input) => {
+	const arr = [...input[0]];
+
+	let cnt = 0;
+	let stack = 0;
+	for (let i = 0; i < arr.length; i++) {
+		if (arr[i] === "(") {
+			stack++;
+		} else {
+			stack--;
+			if (arr[i - 1] === "(") {
+				cnt += stack;
+			} else {
+				cnt++;
+			}
+		}
+	}
+
+	return cnt;
+};
+
+console.log(solution(input));
+```
