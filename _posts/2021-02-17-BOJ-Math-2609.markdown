@@ -1,0 +1,49 @@
+---
+layout: post
+title: "BOJ[2609] - 최대공약수와 최소공배수 by JavaScript"
+date: 2021-02-17 12:00:00 +0900
+categories: BOJ(Math)
+---
+
+# 최대공약수와 최소공배수 (수학)
+
+## 문제
+
+- [백준 2609번 - 최대공약수와 최소공배수](https://www.acmicpc.net/problem/2609)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- 최대공약수는 유클리드 호제법을 이용해서 구합니다.
+- **유클리드 호제법**
+  - a % b = r 이라고 했을 때, GCD(a, b) = GCD(b, r)과 같고, r = 0 일 때 b가 최대 공약수입니다.
+- 최소공배수는 최대공약수를 이용해서 구합니다.
+- 두 수와 최대공약수와 최소공배수 사이에는 이런 공식이 성립합니다.
+  - a _ b = gcd _ lcm
+  - lcm = (a \* b) / gcd
+- 최대공약수를 Greatest Common Divisor 라고 해서 GCD, 최소공배수를 Least Common Multiple 이라 해서 LCM이라고 합니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const GCD = (A, B) => {
+	if (A % B === 0) return B;
+	else return GCD(B, A % B);
+};
+
+const solution = (input) => {
+	const [A, B] = input[0].split(" ").map(Number);
+
+	const gcd = GCD(A, B);
+	const lcm = (A * B) / gcd;
+
+	return `${gcd}\n${lcm}`;
+};
+
+console.log(solution(input));
+```
