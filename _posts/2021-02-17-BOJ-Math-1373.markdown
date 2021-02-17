@@ -1,0 +1,47 @@
+---
+layout: post
+title: "BOJ[1373] - 2진수 8진수 by JavaScript"
+date: 2021-02-17 12:00:00 +0900
+categories: BOJ(Math)
+---
+
+# 2진수 8진수 (수학)
+
+## 문제
+
+- [백준 1373번 - 2진수 8진수](https://www.acmicpc.net/problem/1373)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- 우선 2진수의 수를 뒷자리부터 3자리씩 끊어냅니다. (8은 2의 3승)
+- 각 자리에 2^2(4), 2^1(2), 2^0(1)을 곱하면 8진수를 만들 수 있습니다.
+- 1(256) 1(128) 1(64) / 1(32) 1(16) 1(8) / 1(4) 1(2) 1(1)
+- 7(64) / 7(8) / 7(1)
+- 처음 3개에 4, 2, 1을 곱하면 다음 3개에는 32, 16, 8을 곱해야 할 것 같지만, 이미 자신의 자리 자체가 8이 곱해졌음을 의미하기 때문에 4, 2, 1을 곱합니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const solution = (input) => {
+	const arr = [...input[0]].map(Number);
+
+	const res = [];
+	for (let i = arr.length - 1; i >= 0; i -= 3) {
+		let sum = 0;
+		sum += arr[i];
+		if (i - 1 >= 0) sum += arr[i - 1] * 2;
+		if (i - 2 >= 0) sum += arr[i - 2] * 4;
+		res.push(sum);
+	}
+
+	return res.reverse().join("");
+};
+
+console.log(solution(input));
+```
