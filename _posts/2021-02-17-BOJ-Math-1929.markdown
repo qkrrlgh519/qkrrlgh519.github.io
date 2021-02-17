@@ -1,0 +1,55 @@
+---
+layout: post
+title: "BOJ[1929] - 소수 구하기 by JavaScript"
+date: 2021-02-17 12:00:00 +0900
+categories: BOJ(Math)
+---
+
+# 소수 구하기 (수학)
+
+## 문제
+
+- [백준 1929번 - 소수 구하기](https://www.acmicpc.net/problem/1929)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- 소수는 에라토스테네스의 체를 이용합니다.
+- **에라토스테네스의 체**
+  - 100 이하의 소수를 구한다고 하면 1~100을 적습니다.
+  - 지워지지 않은 수 중에서 가장 작은 수는 2입니다. 2는 소수이고, 2의 배수는 모두 소수가 아니므로 모두 지웁니다.
+  - 그 다음 지워지지 않은 수 중에서 가장 작은 수는 3입니다. 3도 소수입니다. 만약 3이 소수가 아니라면 이전에 지워졌어야 합니다. 3의 배수도 모두 지웁니다.
+  - 위의 과정을 반복하며 소수가 아닌 수는 지웁니다.
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const solution = (input) => {
+	const [M, N] = input[0].split(" ").map(Number);
+
+	const isPrime = Array(N + 1).fill(true);
+	isPrime[0] = isPrime[1] = false;
+
+	for (let i = 2; i <= N; i++) {
+		if (!isPrime[i]) continue;
+
+		for (let j = i + i; j <= N; j += i) {
+			isPrime[j] = false;
+		}
+	}
+
+	let res = "";
+	for (let i = M; i <= N; i++) {
+		if (isPrime[i]) res += `${i}\n`;
+	}
+
+	return res;
+};
+
+console.log(solution(input));
+```
