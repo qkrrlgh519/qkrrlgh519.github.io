@@ -1,0 +1,47 @@
+---
+layout: post
+title: "BOJ[1463] - 1로 만들기 by JavaScript"
+date: 2021-02-18 21:30:00 +0900
+categories: BOJ(DP)
+---
+
+# 1로 만들기
+
+## 문제
+
+- [백준 1463번 - 1로 만들기](https://www.acmicpc.net/problem/1463)
+
+## 언어
+
+- JavaScript
+
+## 문제 풀이 step 1
+
+- dp[n] = 정수 n을 1로 만드는 최소한의 연산 횟수
+- 3개의 경우
+  - 3으로 나누는 경우, dp[n/3] + 1
+  - 2로 나누는 경우, dp[n/2] + 1
+  - 1로 빼눈 경우, dp[n-1] + 1
+
+## 소스 코드
+
+```jsx
+const input = require("fs").readFileSync("/dev/stdin").toString().split("\n");
+
+const solution = (input) => {
+	const N = parseInt(input[0]);
+
+	const dp = [];
+	dp[0] = 0;
+	dp[1] = 0;
+	for (let i = 2; i <= N; i++) {
+		dp[i] = dp[i - 1] + 1;
+		if (i % 3 === 0) dp[i] = Math.min(dp[i], dp[i / 3] + 1);
+		if (i % 2 === 0) dp[i] = Math.min(dp[i], dp[i / 2] + 1);
+	}
+
+	return dp[N];
+};
+
+console.log(solution(input));
+```
