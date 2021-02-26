@@ -2,10 +2,10 @@
 layout: post
 title: "BOJ[17298] - 오큰수 by JavaScript"
 date: 2021-02-16 16:30:00 +0900
-categories: BOJ(DataStructure)
+categories: BOJ(Stack)
 ---
 
-# 오큰수 (스택)
+# 오큰수
 
 ## 문제
 

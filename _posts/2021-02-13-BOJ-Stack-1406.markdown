@@ -2,10 +2,10 @@
 layout: post
 title: "BOJ[1406] - 에디터 by JavaScript"
 date: 2021-02-13 22:00:00 +0900
-categories: BOJ(DataStructure)
+categories: BOJ(Stack)
 ---
 
-# 에디터 (스택)
+# 에디터
 
 ## 문제
 

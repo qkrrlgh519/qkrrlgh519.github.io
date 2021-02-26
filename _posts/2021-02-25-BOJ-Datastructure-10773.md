@@ -2,10 +2,10 @@
 layout: post
 title: "BOJ[10773] - 제로 by JavaScript"
 date: 2021-02-25 21:00:00 +0900
-categories: BOJ(DataStructure)
+categories: BOJ(Stack)
 ---
 
-# 제로 (스택)
+# 제로
 
 ## 문제
 

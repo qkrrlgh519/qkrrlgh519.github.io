@@ -2,10 +2,10 @@
 layout: post
 title: "BOJ[10799] - 쇠막대기 by JavaScript"
 date: 2021-02-16 14:30:00 +0900
-categories: BOJ(DataStructure)
+categories: BOJ(Stack)
 ---
 
-# 쇠막대기 (스택)
+# 쇠막대기
 
 ## 문제
 

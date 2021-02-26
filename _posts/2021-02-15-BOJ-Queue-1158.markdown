@@ -2,10 +2,10 @@
 layout: post
 title: "BOJ[1158] - 요세푸스 문제 by JavaScript"
 date: 2021-02-15 23:00:00 +0900
-categories: BOJ(DataStructure)
+categories: BOJ(Queue)
 ---
 
-# 요세푸스 문제 (큐)
+# 요세푸스 문제
 
 ## 문제
 

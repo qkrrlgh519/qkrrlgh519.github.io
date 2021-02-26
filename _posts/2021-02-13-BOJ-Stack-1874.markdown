@@ -2,10 +2,10 @@
 layout: post
 title: "BOJ[1874] - 스택 수열 by JavaScript"
 date: 2021-02-13 21:30:00 +0900
-categories: BOJ(DataStructure)
+categories: BOJ(Stack)
 ---
 
-# 스택 수열 (스택)
+# 스택 수열
 
 ## 문제
 
