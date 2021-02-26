@@ -2,7 +2,7 @@
 layout: post
 title: "BOJ[17413] - 단어 뒤집기 2 by JavaScript"
 date: 2021-02-15 23:20:00 +0900
-categories: BOJ(Stack) BOJ(Queue)
+categories: BOJ(Stack)
 ---
 
 # 단어 뒤집기 2
