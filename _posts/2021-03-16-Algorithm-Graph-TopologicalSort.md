@@ -123,8 +123,8 @@ console.log(TopologicalSort(n, edges));
 
 ### 06. 문제
 
-- [2252번: 줄 세우기](https://www.acmicpc.net/problem/2252)
-- [1766번: 문제집](https://www.acmicpc.net/problem/1766)
+- [백준 2252번 - 줄 세우기](https://www.acmicpc.net/problem/2252)
+- [백준 1766번 - 문제집](https://www.acmicpc.net/problem/1766)
 
 ### 07. 참고
 
