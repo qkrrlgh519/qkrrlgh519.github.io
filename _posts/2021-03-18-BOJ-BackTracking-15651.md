@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "BOJ[15651] - N과 M (3) by JavaScript"
-date: 2021-03-19 22:30:00 +0900
+date: 2021-03-18 22:30:00 +0900
 categories: BOJ(BackTracking)
 ---
 
