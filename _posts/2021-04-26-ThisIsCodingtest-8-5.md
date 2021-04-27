@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "이것이 코딩테스트다 - [DinamicProgramming] 1로 만들기 by JavaScript"
+title: "이것이 코딩테스트다 - [DynamicProgramming] 1로 만들기 by JavaScript"
 date: 2021-04-26 11:00:00 +0900
 categories: ThisIsCodingtest(NDB)
 ---
