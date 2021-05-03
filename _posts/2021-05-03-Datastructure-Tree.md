@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Datastructure - Tree"
-date: 2021-05-02 11:00:00 +0900
+date: 2021-05-03 20:00:00 +0900
 categories: Datastructure
 ---
 
