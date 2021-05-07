@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "BOJ[16926] - 배열 돌리기 1 by JavaScript"
-date: 2021-05-07 01:30:00 +0900
+date: 2021-05-07 13:30:00 +0900
 categories: BOJ(Implementation)
 ---
 
@@ -33,7 +33,7 @@ categories: BOJ(Implementation)
 
 - 그렇다면 그룹화를 어떻게 해야할까요??
 - 저는 다음과 같이 그룹화를 했습니다.
-  ![백준 16926번 문제 배열 사진](/public/img/BOJ-Implementation/BOJ-19926-1.JPG)
+  ![백준 16926번 문제 배열 사진](/public/img/BOJ-Implementation/BOJ-16926-1.JPG)
   - 좌상단, 우상단, 우하단, 좌하단 : `[1][1], [1][5], [4][5], [4][1]`
   - 좌상단에서 우상단까지의 원소 : `A[1][1], A[1][2], A[1][3], A[1][4]`
   - 우상단에서 우하단까지의 원소 : `A[1][5], A[2][5], A[3][5]`
@@ -61,7 +61,7 @@ categories: BOJ(Implementation)
 
 - 그룹화하고, 회전하고, 다시 배열에 복사하는 작업을 배열의 크기를 줄여가며 진행해야 합니다.
 - 배열의 크기는 어떻게 줄일까요??
-  ![백준 16926번 문제 배열 사진](/public/img/BOJ-Implementation/BOJ-19926-1.JPG)
+  ![백준 16926번 문제 배열 사진](/public/img/BOJ-Implementation/BOJ-16926-1.JPG)
   - 저는 좌상단, 우상단, 우하단, 좌하단에 집중했습니다.
   - 첫 그룹의 좌상단, 우상단, 우하단, 좌하단은 다음과 같습니다.
     - `[1][1], [1][5], [4][5], [4][1]`
@@ -76,7 +76,7 @@ categories: BOJ(Implementation)
 
 - 처음에는 그룹화하지 않고, 한 번씩 회전하는 방식으로 문제를 해결했었습니다. 하지만 상당히 오래걸렸습니다.
 - 시간 차이는 다음 사진과 같습니다. (약 4.5 배 정도 차이 발생)
-  ![백준 16926번 문제 풀이에 따른 경과 시간 차이](/public/img/BOJ-Implementation/BOJ-19926-2.JPG)
+  ![백준 16926번 문제 풀이에 따른 경과 시간 차이](/public/img/BOJ-Implementation/BOJ-16926-2.JPG)
 - 그리고 제가 한 방식은 queue를 이용해서, 실제로 queue 에서 삽입과 삭제를 통해서 회전을 구현했습니다.
 - 하지만 이 부분도 더 개선할 점이 있습니다.
 - queue 말고, 배열을 이용해서 그룹화를 하고, 실제로 회전하지 않고, 회전량 만큼 index 를 밀어주는 방식입니다.
