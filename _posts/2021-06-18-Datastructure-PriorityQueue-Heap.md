@@ -48,7 +48,7 @@ categories: Datastructure
   - 특정 위치의 노드 번호는 새로운 노드가 추가되어도 변하지 않습니다.
 - **삽입 연산**
   - 새로운 요소를 힙의 마지막 노드에 이어서 삽입합니다.
-  - 부모 노드와 비교하면서 부모 노드보다 값이 크면 (or 작으면) 교환합니다.
+  - **부모 노드와 비교하면서 부모 노드보다 값이 크면 (or 작으면) 교환**합니다.
   - 부모 노드보다 작은 (or 큰) 상황이 올 때까지 교환합니다.
     - 실제 구현에서는 바로 교환하는 것이 아닙니다.
     - **부모 노드만 끌어 내린 다음, 삽입될 위치가 획실해 진 다음** **최종적으로 새로운 노드는 그 위치로 이동**합니다.
@@ -57,10 +57,10 @@ categories: Datastructure
 
   - 힙의 최상위 노드인 루트 노드를 삭제합니다.
   - 삭제된 루트 노드에는 힙의 마지막 노드를 가져옵니다.
-  - 새로운 루트 노드와 자식 노드들을 비교하면서 자식 노드가 값이 크면 (or 작으면) 교환 합니다.
+  - **새로운 루트 노드와 자식 노드들을 비교하면서 자식 노드가 값이 크면 (or 작으면) 교환**합니다.
   - 자식 노드보다 큰 상황이 올 때까지 교환합니다.
 
-  ```jsx
+  ```javascript
   // 삽입 연산
   const insertMaxHeap = (array, item) => {
   	array.push(item); // 1. 마지막 노드로 삽입
@@ -111,6 +111,69 @@ categories: Datastructure
   	// 아까 저장해놨던 루트 노드 값 반환
   	return item;
   };
+  ```
+
+  ```javascript
+  // 최소힙 - 클래스 형태
+  class MinHeap {
+  	constructor() {
+  		this.bucket = [null];
+  	}
+
+  	// index 를 현재 크기 + 1 로 초기화
+  	// 부모 노드보다 작다면, 부모 자식 노드 교환
+  	// 부모 노드보다 큰 위치를 찾으면 item 넣기
+  	insert(item) {
+  		let index = this.bucket.length;
+
+  		while (index !== 1 && item < this.bucket[parseInt(index / 2)]) {
+  			this.bucket[index] = this.bucket[parseInt(index / 2)];
+  			index = parseInt(index / 2);
+  		}
+
+  		this.bucket[index] = item;
+  	}
+
+  	// 최상위 부모 index 와 왼쪽 자식 index 초기화
+  	// return 할 item 과 가장 마지막 item 저장
+  	// 자식 index 가 현재 배열을 벗어나지 않을 동안
+  	// 왼쪽 자식과 오른쪽 자식 중 더 작은 자식 찾고
+  	// 마지막 item 이 더 작다면 반복 종료
+  	// 마지막 item 이 더 크다면 부모 노드에 자식 노드 넣고
+  	// 부모 index 는 자식 index 가 되고, 자식 index 는 그의 왼쪽 자식 index 로 설정
+  	// 반복이 종료되었다면, 부모 index 에 마지막 item 넣기
+  	delete() {
+  		if (this.isEmpty()) return;
+
+  		let parentIdx = 1;
+  		let childIdx = 2;
+  		let item = this.bucket[1];
+  		let lastItem = this.bucket.pop();
+
+  		while (childIdx < this.bucket.length) {
+  			if (
+  				childIdx + 1 < this.bucket.length &&
+  				this.bucket[childIdx] > this.bucket[childIdx + 1]
+  			)
+  				childIdx += 1;
+
+  			if (lastItem <= this.bucket[childIdx]) break;
+
+  			this.bucket[parentIdx] = this.bucket[childIdx];
+
+  			parentIdx = childIdx;
+  			childIdx *= 2;
+  		}
+
+  		this.bucket[parentIdx] = lastItem;
+
+  		return item;
+  	}
+
+  	isEmpty() {
+  		return this.bucket.length === 1;
+  	}
+  }
   ```
 
 ## 5. 힙 (Heap) 의 시간복잡도
