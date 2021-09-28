@@ -144,7 +144,7 @@ class DisjointSet {
 
 ### 03. 해결 2 : 경로 압축 (path compression) 최적화
 
-    ![경로 압축 최적화](/public/img/Graph/unionfind5.JPG)
+![경로 압축 최적화](/public/img/Graph/unionfind5.JPG)
 
 - **찾기 연산이 중복된 계산을 여러번** 하고 있다는 데 착안한다.
 - find(u)를 통해 u가 속하는 루트를 찾아냈다고 하자. 이때 **parent[u]를 찾아낸 루트로 아예 바꿔** 버리면 다음번에 find(u)가 호출되었을 때는 경로를 따라 올라갈 것 없이 바로 루트를 찾을 수 있을 것이다.
