@@ -77,6 +77,8 @@ categories: Datastructure
 
   // 삭제 연산
   const deleteMaxHeap = (heapArray) => {
+  	if (heapArray.length === 1) return;
+
   	let parentIdx = 1; // index
   	let childIdx = 2; // 우선, 왼쪽 자식 index를 keep!!
   	let item = heapArray[1]; // return 하기 위해서 기록
@@ -105,8 +107,9 @@ categories: Datastructure
   		childIdx *= 2; // 한 단계 아래의 왼쪽 자식 노드로
   	}
 
+  	// 마지막 item 을 pop 해도 heap 에 item 이 남아있다면,
   	// 마지막에 노드를 올바른 위치를 넣음으로 재구성 완료
-  	heapArray[parentIdx] = last;
+  	if (heapArray.length !== 1) heapArray[parentIdx] = last;
 
   	// 아까 저장해놨던 루트 노드 값 반환
   	return item;
@@ -165,7 +168,9 @@ categories: Datastructure
   			childIdx *= 2;
   		}
 
-  		this.bucket[parentIdx] = lastItem;
+  		// 마지막 item 을 pop 해서 heap 이 텅 빈 상태에서 이 작업을 수행하면,
+  		// heap 에서 마지막 item 이 계속해서 남아있는 문제가 발생합니다.
+  		if (!this.isEmpty()) this.bucket[parentIdx] = lastItem;
 
   		return item;
   	}
