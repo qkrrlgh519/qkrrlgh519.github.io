@@ -52,11 +52,9 @@ categories: BOJ(Queue)
 - 이 정보들을 이용해서 시뮬레이션 하다가, 뱀이 벽 또는 자기자신의 몸과 부딪히면 그 때의 초 (seconds) 를 출력해주면 됩니다.
 - 추가 설명은 주석에 작성하겠습니다.
 
-## 문제
-
 ## 소스 코드
 
-```jsx
+```javascript
 const input = require("fs")
 	.readFileSync("/dev/stdin")
 	.toString()
