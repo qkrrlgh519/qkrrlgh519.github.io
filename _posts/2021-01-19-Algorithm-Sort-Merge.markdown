@@ -42,50 +42,47 @@ categories: Algorithm(Sort)
   2. Merge 함수는 왼쪽 부분리스트와 오른쪽 부분리스트의 원소들을 맨 왼쪽부터 하나씩 비교하면서 작은 값들을 sorted 배열에 넣어준다. (이때 왼쪽 또는 오른쪽 중 하나가 끝나면 마치지 못한 배열을 그대로 sorted 배열에 넣어준다.) 그리고 sorted 배열을 원래 배열에 옮겨준다.
   3. index를 이용해서 처리하는 방식이기에 추가 메모리는 sorted 배열밖에 없다.
 
-```jsx
+```javascript
 // 방법 1. 정석적인 방법
 
-const sorted = [];
-
 const merge = (array, left, mid, right) => {
-	let i = left; // 왼쪽 분할 리스트의 맨 왼쪽 index
-	let j = mid + 1; // 오른쪽 분할 리스트의 맨 왼쪽 index
-	let k = left; // sorted 배열의 맨 왼쪽 index
-	let l;
+	const sorted = [];
 
-	while (i <= mid && j <= right) {
+	let [leftIdx, rightIdx] = [left, mid + 1]; // 왼쪽 분할 리스트의 맨 왼쪽 index, 오른쪽 분할 리스트의 맨 왼쪽 index
+	let sortIdx = left; // sorted 배열의 맨 왼쪽 index
+
+	while (leftIdx <= mid && rightIdx <= right) {
 		// 왼쪽 or 오른쪽 분할리스트 중 하나라도 다 돌면 break
-		if (array[i] <= array[j]) {
+		if (array[leftIdx] <= array[rightIdx]) {
 			// 오름차순 정렬이므로 더 작은 요소를 sorted에 넣는다.
-			sorted[k++] = array[i++];
+			sorted[sortIdx++] = array[leftIdx++];
 		} else {
-			sorted[k++] = array[j++];
+			sorted[sortIdx++] = array[rightIdx++];
 		}
 	}
 
-	if (i <= mid) {
+	if (leftIdx <= mid) {
 		// 왼쪽 분할리스트를 덜 돌은 경우 (이미 정렬된 상태이니 옮기기만 하면 됨)
-		for (l = i; l <= mid; l++) {
-			sorted[k++] = array[l];
+		for (let i = leftIdx; i <= mid; i++) {
+			sorted[sortIdx++] = array[i];
 		}
 	} else {
 		// 오른쪽 분할리스트를 덜 돌은 경우
-		for (l = j; l <= right; l++) {
-			sorted[k++] = array[l];
+		for (let i = rightIdx; i <= right; i++) {
+			sorted[sortIdx++] = array[i];
 		}
 	}
 
-	for (l = left; l <= right; l++) {
+	for (let i = left; i <= right; i++) {
 		// 정렬된 리스트를 원래 리스트에 옮긴다.
-		array[l] = sorted[l];
+		array[i] = sorted[i];
 	}
 };
 
 const MergeSort = (array, left, right) => {
-	let mid;
-
 	if (left < right) {
-		mid = parseInt((left + right) / 2);
+		const mid = parseInt((left + right) / 2);
+
 		MergeSort(array, left, mid);
 		MergeSort(array, mid + 1, right);
 		merge(array, left, mid, right);
@@ -97,7 +94,7 @@ MergeSort(array, 0, 5);
 console.log(array);
 ```
 
-```java
+```javascript
 // 방법 2. 더 짧고, 더 직관적인 방법 허나 동작 방식이 조금 다름
 
 const merge = (leftArray, rightArray) => {
