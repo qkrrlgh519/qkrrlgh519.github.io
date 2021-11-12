@@ -18,7 +18,7 @@ categories: Algorithm(Sort)
 ![퀵 정렬 원리](/public/img/Sort/quicksort1.JPG)
 
 - **퀵 정렬의 각 단계**
-  1. **분할 (Divide)** : 입력 배열을 피벗을 기준으로 비균등하게 2개의 부분 배열 (피벗을 중심으로 왼쪽 : 피벗보다 작은 요소, 오른쪽 피벗보다 큰 요소)로 분할한다.
+  1. **분할 (Divide)** : 입력 배열을 피벗을 기준으로 비균등하게 2개의 부분 배열 (피벗을 중심으로 "왼쪽은 피벗보다 작은 요소", "오른쪽은 피벗보다 큰 요소")로 분할한다.
   2. **정복 (Conquer)** : 부분 배열을 정렬한다. 부분 배열의 크기가 충분히 작지 않으면 순환 호출을 이용해 다시 분할 정복 기법을 적용한다.
   3. **결합 (Combine)** : 정렬된 부분 배열들을 하나의 배열에 합병한다.
   - 순환 호출이 한 번 진행될 때마다 최소한 하나의 원소(피벗)는 최종적인 위치가 정해지므로, 이 알고리즘은 반드시 끝난다는 것을 보장할 수 있다.
@@ -38,13 +38,14 @@ categories: Algorithm(Sort)
 
 ### 03. 순서도 (알고리즘)
 
-```jsx
+```javascript
 // partition 함수
 const partition = (array, left, right) => {
-	let pivot, temp; // pivot에는 실제 값, low와 high에는 index 값
-	let low = left;
-	let high = right + 1; // do-while이라서 +1 진행
-	pivot = array[left]; // 간단한 구현을 위해 피벗을 리스트의 첫 번째 데이터로
+	// 간단한 구현을 위해 피벗을 리스트의 첫 번째 데이터로
+	let pivot = array[left]; // pivot에는 실제 값, low와 high에는 index 값
+
+	// left 와 right 는 기준값으로 써야하기 때문에 low 와 high 변수를 별도로 생성하는 것
+	let [low, high] = [left, right + 1]; // do-while이라서 +1 진행
 
 	do {
 		do {
@@ -57,25 +58,21 @@ const partition = (array, left, right) => {
 
 		if (low < high) {
 			// low와 high가 엇갈리지 않았다면 SWAP!!
-			temp = array[low];
-			array[low] = array[high];
-			array[high] = temp;
+			[array[low], array[high]] = [array[high], array[low]];
 		}
 	} while (low < high); // low와 high가 엇갈리면 종료
 
 	// low와 high가 엇갈렸으므로 high와 pivot을 SWAP!!
-	temp = array[high];
-	array[high] = array[left];
-	array[left] = temp;
+	[array[high], array[left]] = [array[left], array[high]];
 
-	return high; //pivot 리턴
+	return high; // pivot의 index 리턴
 };
 
 // QuickSort 함수
 const QuickSort = (array, left, right) => {
 	if (left < right) {
-		//하나가 아닌 둘 이상일때
-		let pivotIdx = partition(array, left, right);
+		// 하나가 아닌 둘 이상일때
+		const pivotIdx = partition(array, left, right);
 
 		QuickSort(array, left, pivotIdx - 1); // pivot 기준 작은 값들로 정렬된 왼쪽 리스트
 		QuickSort(array, pivotIdx + 1, right); // pivot 기준 큰 값들로 정렬된 오른쪽 리스트
