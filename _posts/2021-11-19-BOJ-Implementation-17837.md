@@ -129,7 +129,6 @@ const movePieces = (pieces, posBoard, tempPieces, nx, ny) => {
 const movePiecesAndCheck = (n, k, board, pieces, posBoard) => {
 	let turn = 1;
 
-	let cnt = 1;
 	while (turn <= 1000) {
 		// 총 k 개의 말에 대해서 로직 진행
 		for (let i = 0; i < k; i++) {
