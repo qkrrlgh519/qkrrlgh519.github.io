@@ -84,14 +84,111 @@ console.log(solution(input));
 
 ---
 
-## 두 포인터 순서도
+## 두 포인터 방식 순서도
 
-## 두 포인터 문제 풀이 step 1
+1. 두 개의 포인터를 정의하고, 그 범위 안에 있는 초밥의 종류 세기
+2. 각 포인터를 한 칸씩 오른쪽으로 이동하며 초밥의 종류의 개수 갱신
+3. 쿠폰도 고려하면서 위의 과정 수행
+4. 초밥의 종류의 개수의 최댓값 출력
 
-## 두 포인터 후기
+## 두 포인터 방식 문제 풀이 step 1
 
-## 두 포인터 소스코드
+- 두 개의 포인터를 사용하는 방식으로, 매번 범위 안에 있는 초밥의 종류를 검사할 필요도 없고, SET 자료구조를 사용할 필요도 없습니다.
+- 우선 두 개의 포인터를 정의합니다.
+- 그리고 포인터의 범위 안에 있는 초밥의 종류를 세어줍니다. 그리고 쿠폰도 고려해줍니다.
+- 그리고 각 포인터를 한 칸씩 오른쪽으로 이동하며 초밥의 종류의 개수를 갱신합니다.
+  - 왼쪽 포인터가 가리키는 초밥은 제거합니다.
+  - 각 포인터를 한 칸씩 오른쪽으로 이동시킵니다.
+  - 오른쪽 포인터가 가리키는 초밥은 포함시킵니다.
+- 매번 갱신하면서, 초밥의 종류의 최댓값을 구합니다.
+- 추가 설명은 주석으로 작성하겠습니다.
+
+## 두 포인터 방식 후기
+
+- 두 포인터를 사용하게 되면, 매번 범위 안에 초밥의 종류의 개수를 검사할 필요가 없기 때문에 알고리즘 성능을 향상시킬 수 있다는 점이 좋은 것 같습니다.
+
+## 두 포인터 방식 소스코드
 
 ```javascript
-// TODO
+const input = require("fs")
+	.readFileSync("/dev/stdin")
+	.toString()
+	.trim()
+	.split("\n");
+
+const solution = (input) => {
+	// 접시의 수, 초밥의 가짓수, 먹는 접시 수, 쿠폰 번호
+	const [n, d, k, c] = input[0].split(" ").map(Number);
+	const list = input.slice(1).map(Number);
+
+	// [k 번 스시의 총 개수, k 번 스시의 남아있는 수]
+	const sushi = Array.from(Array(d + 1), () => Array(2).fill(0));
+	for (let i = 0; i < n; i++) {
+		sushi[list[i]][0] += 1;
+		sushi[list[i]][1] += 1;
+	}
+
+	let max = 0;
+
+	// 초기 상태
+	let cnt = 0;
+	let [left, right] = [0, k - 1];
+	for (let i = left; i <= right; i++) {
+		const num = list[i];
+
+		// 아직 그 종류가 안팔렸다면,
+		if (sushi[num][0] === sushi[num][1]) cnt += 1;
+		sushi[num][1] -= 1;
+	}
+
+	let coupon = true;
+	// 쿠폰의 종류가 안팔렸다면,
+	if (sushi[c][0] === sushi[c][1]) {
+		coupon = false;
+
+		cnt += 1;
+		sushi[c][1] -= 1;
+	}
+
+	max = Math.max(max, cnt);
+
+	// 진행 상태
+	for (let i = 1; i < n; i++) {
+		if (coupon === false) {
+			coupon = true;
+
+			// 반납했을 때, 총 개수와 남아있는 수가 같다면,
+			if (sushi[c][0] === sushi[c][1] + 1) cnt -= 1;
+			sushi[c][1] += 1;
+		}
+
+		// 반납했을 때, 총 개수와 남아있는 수가 같다면,
+		let num = list[left];
+		if (sushi[num][0] === sushi[num][1] + 1) cnt -= 1;
+		sushi[num][1] += 1;
+
+		// 포인터 갱신
+		[left, right] = [left + 1, right + 1];
+		if (right === n) right = 0;
+
+		// 스시의 종류가 안팔렸다면,
+		num = list[right];
+		if (sushi[num][0] === sushi[num][1]) cnt += 1;
+		sushi[num][1] -= 1;
+
+		// 쿠폰을 사용하지 않았고, 쿠폰의 종류가 안팔렸다면,
+		if (coupon === true && sushi[c][0] === sushi[c][1]) {
+			coupon = false;
+
+			cnt += 1;
+			sushi[c][1] -= 1;
+		}
+
+		max = Math.max(max, cnt);
+	}
+
+	return max;
+};
+
+console.log(solution(input));
 ```
