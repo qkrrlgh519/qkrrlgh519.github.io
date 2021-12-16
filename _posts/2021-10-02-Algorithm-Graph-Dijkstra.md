@@ -113,7 +113,7 @@ class MinHeap {
 				childIdx += 1;
 			}
 
-			if (lastItem <= this.bucket[childIdx]) break;
+			if (lastItem[0] <= this.bucket[childIdx][0]) break;
 
 			this.bucket[parentIdx] = this.bucket[childIdx];
 
