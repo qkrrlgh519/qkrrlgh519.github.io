@@ -16,6 +16,7 @@ categories: Algorithm(Graph)
 ### 01. 정의
 
 - 탐욕적인 방법을 이용하는 알고리즘으로, **그래프에서 가장 비용이 작은 간선을 우선적으로 연결해서 Minimum Spanning Tree를 구하는 알고리즘**이다.
+  - 이때 사이클을 발생시킬 수 있는 간선의 경우, 집합에 포함시키지 않는다.
 - Kruskal 알고리즘은 전역적으로 최적의 해답을 주는것으로 증명되어 있다.
 - **"가중치가 가장 작은 간선과 가중치가 가장 큰 간선 중 어느쪽이 MST에 포함될 가능성이 높을까?"** 라는 의문에 착안해서 만들어진 알고리즘이다.
 
@@ -135,5 +136,6 @@ Kruskal();
 
 - C언어로 쉽게 풀어쓴 자료구조 (천인국, 공용해, 하상호 지음)
 - 알고리즘 문제 해결 전략 2 (구종만 지음)
+- [이것이 코딩테스트다 (나동빈 지음)](https://www.hanbit.co.kr/store/books/look.php?p_code=B8945183661)
 - [https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html](https://gmlwjd9405.github.io/2018/08/29/algorithm-kruskal-mst.html)
 - [https://m.blog.naver.com/ndb796/221230994142](https://m.blog.naver.com/ndb796/221230994142)
