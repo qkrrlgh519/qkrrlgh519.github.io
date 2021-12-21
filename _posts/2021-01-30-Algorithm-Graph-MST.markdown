@@ -9,6 +9,7 @@ categories: Algorithm(Graph)
 
 ### 01. 정의
 
+- [한 줄] 하나의 그래프가 있을 때 **모든 노드를 포함**하면서 **사이클이 존재하지 않는** 부분 그래프 (트리의 성립 조건)
 - 원래 그래프의 **정점 전부**와 **간선의 부분 집합**으로 구성된 부분 그래프
 - 이때 스패닝 트리에 **포함된 간선들은 정점들을 트리 형태로 전부 연결**해야 한다.
   - **트리 형태**여야 한다는 말은 **선택된 간선들이 사이클을 이루지 않는다**는 뜻이다.
@@ -65,4 +66,5 @@ categories: Algorithm(Graph)
 
 - 알고리즘 문제 해결 전략 2 (구종만 지음)
 - C언어로 쉽게 풀어쓴 자료구조 (천인국, 공용해, 하상호 지음)
+- [이것이 코딩테스트다 (나동빈 지음)](https://www.hanbit.co.kr/store/books/look.php?p_code=B8945183661)
 - [https://gmlwjd9405.github.io/2018/08/28/algorithm-mst.html](https://gmlwjd9405.github.io/2018/08/28/algorithm-mst.html)
