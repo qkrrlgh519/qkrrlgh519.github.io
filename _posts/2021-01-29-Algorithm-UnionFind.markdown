@@ -78,7 +78,7 @@ categories: Algorithm(Graph)
 ```javascript
 class DisjointSet {
 	constructor(n) {
-		this.parent = Array.from({length: n}, (_, i) => i + 1); // init
+		this.parent = Array.from({length: n}, (_, i) => i); // init
 	}
 
 	// u가 속한 트리의 루트의 번호를 반환
@@ -125,7 +125,7 @@ class DisjointSet {
   // union 연산시 트리 높이 비교하는 부분과 높이 같은 경우 처리하는 부분 추가
 
   constructor(n) {
-  	this.parent = Array.from({length: n}, (_, i) => i + 1); // init
+  	this.parent = Array.from({length: n}, (_, i) => i); // init
   	this.rank = Array.from({length: n}, () => 1); // 추가된 부분!!
   }
 
@@ -182,7 +182,7 @@ class DisjointSet {
   ```javascript
   class DisjointSet {
   	constructor(n) {
-  		this.parent = Array.from({length: n}, (_, i) => i + 1); //init (편의상 i + 1)
+  		this.parent = Array.from({length: n}, (_, i) => i); //init (편의상 0 번 정점 유지)
   		this.rank = Array.from({length: n}, () => 1);
   	}
 
