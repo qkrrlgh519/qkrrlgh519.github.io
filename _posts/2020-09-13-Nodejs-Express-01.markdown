@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "Express 01 - 소개"
-date:   2020-09-13 22:15:00 +0900
-categories: Express(Node.js)
+title: "Express 01 - 소개"
+date: 2020-09-13 22:15:00 +0900
+categories: JavaScript
 ---
 
 # Express
@@ -25,12 +25,12 @@ categories: Express(Node.js)
 - myapp 디렉토리에 app.js라는 이름의 파일을 작성한 후 다음과 같은 코드를 추가하세요.
 
 ```jsx
-const express = require('express');
+const express = require("express");
 const app = express();
-const port = 3000
+const port = 3000;
 
-app.get('/', (req, res) => {
-	res.send('Hello World');
+app.get("/", (req, res) => {
+	res.send("Hello World");
 });
 
 app.listen(port, () => {
