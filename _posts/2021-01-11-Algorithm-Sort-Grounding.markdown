@@ -35,6 +35,7 @@ categories: Algorithm(Sort)
 
 ### 06. 참고
 
-- C언어로 쉽게 풀었느 자료구조 (천인국, 공용해, 하상호 지음)
+- C언어로 쉽게 풀어쓰는 자료구조 (천인국, 공용해, 하상호 지음)
 - https://jinhyy.tistory.com/9
 - https://godgod732.tistory.com/10
+
