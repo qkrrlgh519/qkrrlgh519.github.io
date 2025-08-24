@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Sort Algorithm(Overview)
+title: "Sort Algorithm(Overview)"
 date: 2025-08-07 12:00:00 +0900
 categories: Algorithm(Overview)
 ---
